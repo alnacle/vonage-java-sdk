@@ -13,13 +13,21 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+package com.vonage.client.camara.devicestatus;
 
-/**
- * This package contains classes to support usage of the
- * <a href=https://developer.vonage.com/en/api/camara/sim-swap>SIM Swap API</a>. Please refer to
- * <a href=https://developer.vonage.com/en/sim-swap/overview>the developer documentation</a>
- * for an overview of the concepts.
- *
- * @since 8.8.0
- */
-package com.vonage.client.camara.simswap;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vonage.client.JsonableBaseObject;
+
+class RoamingStatusResponse extends JsonableBaseObject {
+    private boolean roaming;
+
+    /**
+     * Get the current roaming status information
+     *
+     * @return roaming status of the device 
+     */
+    @JsonProperty("roaming")
+    public boolean getRoaming() {
+        return roaming;
+    }
+}

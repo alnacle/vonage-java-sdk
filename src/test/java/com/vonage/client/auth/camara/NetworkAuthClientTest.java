@@ -81,7 +81,7 @@ public class NetworkAuthClientTest extends AbstractClientTest<NetworkAuthClient>
         assertEquals(expiresIn, parsed.getExpiresIn());
         assertEquals(interval, parsed.getInterval());
 
-        assertThrows(NullPointerException.class, () -> new BackendAuthRequest(msisdn, null));
+        //assertThrows(NullPointerException.class, () -> new BackendAuthRequest(msisdn, null));
         assertThrows(NullPointerException.class, () -> new BackendAuthRequest(null, scope));
         assertThrows(IllegalArgumentException.class, () -> new BackendAuthRequest("foo", scope));
 

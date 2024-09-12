@@ -41,6 +41,13 @@ public abstract class AuthRequest implements QueryParamsRequest {
         );
     }
 
+    protected AuthRequest(String msisdn, NotApplicableScope scope) {
+        params.put("scope", "openid dpv:NotApplicableScope#" +
+                Objects.requireNonNull(scope, "Scope is required.")
+        );
+    }
+
+
     @Override
     public final Map<String, String> makeParams() {
         return params;

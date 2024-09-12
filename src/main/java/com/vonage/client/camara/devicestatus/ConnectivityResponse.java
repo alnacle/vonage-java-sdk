@@ -13,13 +13,21 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+package com.vonage.client.camara.devicestatus;
 
-/**
- * This package contains classes to support usage of the
- * <a href=https://developer.vonage.com/en/api/camara/sim-swap>SIM Swap API</a>. Please refer to
- * <a href=https://developer.vonage.com/en/sim-swap/overview>the developer documentation</a>
- * for an overview of the concepts.
- *
- * @since 8.8.0
- */
-package com.vonage.client.camara.simswap;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vonage.client.JsonableBaseObject;
+
+class ConnectivityStatusResponse extends JsonableBaseObject {
+    private String connectivityStatus;
+
+    /**
+     * Get the current connectivity status information
+     *
+     * @return connectivity status of the device 
+     */
+    @JsonProperty("connectivityStatus")
+    public String getConnectivity() {
+        return connectivityStatus;
+    }
+}
