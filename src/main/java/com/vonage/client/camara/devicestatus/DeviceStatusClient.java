@@ -101,7 +101,7 @@ public class DeviceStatusClient extends NetworkApiClient {
 	 *     <li><b>502</b>: Bad gateway.</li>
 	 * </ul>
      */
-    public boolean getRoamingStatus(String phoneNumber) {
-        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getRoaming();
+    public RoamingStatus getRoamingStatus(String phoneNumber) {
+        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getRoamingStatus();
     }
 }

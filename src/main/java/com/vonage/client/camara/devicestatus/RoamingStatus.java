@@ -1,3 +1,4 @@
+
 /*
  *   Copyright 2024 Vonage
  *
@@ -17,17 +18,43 @@ package com.vonage.client.camara.devicestatus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vonage.client.JsonableBaseObject;
+import java.util.List;
+import java.util.Objects;
 
-class RoamingStatusResponse extends JsonableBaseObject {
-    private RoamingStatus roamingStatus;
+
+class RoamingStatus {
+    private boolean roaming;
+    private int countryCode;
+    private List<String> countryName;
 
     /**
      * Get the current roaming status information
      *
      * @return roaming status of the device 
      */
-    @JsonProperty("roaming") // FIXME
-    public RoamingStatus getRoamingStatus() {
-        return roamingStatus;
+    @JsonProperty("roaming")
+    public boolean getRoaming() {
+        return roaming;
     }
+
+    /**
+     * Get the country Code 
+     *
+     * @return country code 
+     */
+    @JsonProperty("countryCode")
+    public int getCountryCode() {
+        return countryCode;
+    }
+
+    /**
+     * Get the country Name list 
+     *
+     * @return array of country names 
+     */
+    @JsonProperty("countryName")
+    public List<String> getCountryName() {
+        return countryName;
+    }
+
 }
