@@ -28,6 +28,7 @@ import com.vonage.client.camara.CamaraResponseException;
 import com.vonage.client.camara.NetworkApiClient;
 import com.vonage.client.common.HttpMethod;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * A client for communicating with the Vonage Device Status API. The standard way to obtain an instance
@@ -89,7 +90,7 @@ public class DeviceStatusClient extends NetworkApiClient {
      *
      * @param phoneNumber Subscriber number in E.164 format (starting with country code). Optionally prefixed with '+'.
      *
-     * @return TBC
+     * @return {@code boolean} true if device is on roaming
      * 
      * @throws CamaraResponseException If the request was unsuccessful. This could be for the following reasons:
 	 * <ul>
@@ -101,7 +102,50 @@ public class DeviceStatusClient extends NetworkApiClient {
 	 *     <li><b>502</b>: Bad gateway.</li>
 	 * </ul>
      */
-    public RoamingStatus getRoamingStatus(String phoneNumber) {
-        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getRoamingStatus();
+    public boolean getRoaming(String phoneNumber) {
+        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getRoaming();
     }
+
+    /**
+     * Get the current country code 
+     *
+     * @param phoneNumber Subscriber number in E.164 format (starting with country code). Optionally prefixed with '+'.
+     *
+     * @return {@code int} country code
+     * 
+     * @throws CamaraResponseException If the request was unsuccessful. This could be for the following reasons:
+	 * <ul>
+     *     <li><b>400</b>: Invalid request arguments.</li>
+     *     <li><b>401</b>: Request not authenticated due to missing, invalid, or expired credentials.</li>
+     *     <li><b>403</b>: Client does not have sufficient permissions to perform this action.</li>
+     *     <li><b>404</b>: SIM Swap can't be checked because the phone number is unknown.</li>
+	 *     <li><b>409</b>: Another request is created for the same MSISDN.</li>
+	 *     <li><b>502</b>: Bad gateway.</li>
+	 * </ul>
+     */
+    public int getCountryCode(String phoneNumber) {
+        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getCountryCode();
+    }
+
+    /**
+     * Get the list of country names 
+     *
+     * @param phoneNumber Subscriber number in E.164 format (starting with country code). Optionally prefixed with '+'.
+     *
+     * @return {@code List<String>} List of countries 
+     * 
+     * @throws CamaraResponseException If the request was unsuccessful. This could be for the following reasons:
+	 * <ul>
+     *     <li><b>400</b>: Invalid request arguments.</li>
+     *     <li><b>401</b>: Request not authenticated due to missing, invalid, or expired credentials.</li>
+     *     <li><b>403</b>: Client does not have sufficient permissions to perform this action.</li>
+     *     <li><b>404</b>: SIM Swap can't be checked because the phone number is unknown.</li>
+	 *     <li><b>409</b>: Another request is created for the same MSISDN.</li>
+	 *     <li><b>502</b>: Bad gateway.</li>
+	 * </ul>
+     */
+    public List<String> getCountryName(String phoneNumber) {
+        return roaming.execute(new DeviceStatusRequest(phoneNumber)).getCountryName();
+    }
+
 }
