@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vonage.client.JsonableBaseObject;
 
 class ConnectivityStatusResponse extends JsonableBaseObject {
-    private String connectivityStatus;
+    private ConnectivityStatus connectivityStatus;
 
     /**
      * Get the current connectivity status information
@@ -27,7 +27,7 @@ class ConnectivityStatusResponse extends JsonableBaseObject {
      * @return connectivity status of the device 
      */
     @JsonProperty("connectivityStatus")
-    public String getConnectivityStatus() {
+    public ConnectivityStatus getConnectivityStatus() {
         return connectivityStatus;
     }
 }

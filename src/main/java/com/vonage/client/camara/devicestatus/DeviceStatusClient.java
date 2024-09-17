@@ -69,7 +69,7 @@ public class DeviceStatusClient extends NetworkApiClient {
      *
      * @param phoneNumber Subscriber number in E.164 format (starting with country code). Optionally prefixed with '+'.
      *
-     * @return {@code String} information about current connectivity Status
+     * @return Information about current connectivity status.
      * 
      * @throws CamaraResponseException If the request was unsuccessful. This could be for the following reasons:
      * <ul>
@@ -81,7 +81,7 @@ public class DeviceStatusClient extends NetworkApiClient {
      *     <li><b>502</b>: Bad gateway.</li>
      * </ul>
      */
-    public String getConnectivityStatus(String phoneNumber) {
+    public ConnectivityStatus getConnectivityStatus(String phoneNumber) {
         return connectivity.execute(new DeviceStatusRequest(phoneNumber)).getConnectivityStatus();
     }
 

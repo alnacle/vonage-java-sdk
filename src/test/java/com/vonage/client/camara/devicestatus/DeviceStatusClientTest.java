@@ -18,7 +18,6 @@ package com.vonage.client.camara.devicestatus;
 
 import com.vonage.client.AbstractClientTest;
 import com.vonage.client.RestEndpoint;
-import com.vonage.client.TestUtils;
 import com.vonage.client.auth.camara.*;
 import static com.vonage.client.auth.camara.NotApplicableScope.CONNECTIVITY_READ;
 import static com.vonage.client.auth.camara.NotApplicableScope.ROAMING_READ;
@@ -64,9 +63,9 @@ public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClien
     @Test
     public void testConnectivityDeviceStatus() throws Exception {
         setAuth(CONNECTIVITY_READ);
-        String status = "CONNECTED_DATA", connectedResponse = "{\"connectivityStatus\":\""+status+"\"}";
+        var status = ConnectivityStatus.CONNECTED_DATA;
 
-        stubBackendNetworkResponse(connectedResponse);
+        stubBackendNetworkResponse("{\"connectivityStatus\":\""+status.name()+"\"}");
         assertEquals(status, client.getConnectivityStatus(phoneNumber));
 
         setAuth(CONNECTIVITY_READ);
