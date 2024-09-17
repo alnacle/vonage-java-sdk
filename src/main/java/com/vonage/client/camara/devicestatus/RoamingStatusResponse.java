@@ -41,7 +41,7 @@ public class RoamingStatusResponse extends JsonableBaseObject {
      * @return country code 
      */
     @JsonProperty("countryCode")
-    public int getCountryCode() {
+    public Integer getCountryCode() {
         return countryCode;
     }
 
