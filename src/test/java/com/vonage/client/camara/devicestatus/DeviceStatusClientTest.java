@@ -73,7 +73,7 @@ public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClien
     }
 
     @Test
-    public void testRoamingDeviceStatus() throws Exception {
+    public void testRoamingDeviceStatusAllFields() throws Exception {
         setAuth(ROAMING_READ);
         boolean roaming = true;
         int countryCode = 234;
@@ -88,6 +88,17 @@ public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClien
 
         setAuth(ROAMING_READ);
         assert403CamaraResponseException(() -> client.getRoamingStatus(phoneNumber));
+    }
+
+    @Test
+    public void testRoamingDeviceStatusRoamingOnly() throws Exception {
+        setAuth(ROAMING_READ);
+
+        stubBackendNetworkResponse("{\"roaming\":false}");
+        RoamingStatusResponse response = client.getRoamingStatus(phoneNumber);
+        assertFalse(response.getRoaming());
+        assertNull(response.getCountryCode());
+        assertNull(response.getCountryName());
     }
 
     @Test

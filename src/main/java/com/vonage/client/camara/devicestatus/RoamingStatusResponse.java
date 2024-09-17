@@ -22,7 +22,7 @@ import java.util.List;
 
 public class RoamingStatusResponse extends JsonableBaseObject {
     private boolean roaming;
-    private int countryCode;
+    private Integer countryCode;
     private List<String> countryName;
 
     /**
