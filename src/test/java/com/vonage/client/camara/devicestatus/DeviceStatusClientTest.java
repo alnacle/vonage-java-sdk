@@ -68,7 +68,7 @@ public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClien
         final String connectedResponse = "{\"connectivityStatus\":\"CONNECTED_DATA\"}";
 
         stubBackendNetworkResponse(connectedResponse);
-        assertEquals(client.getConnectivityStatus(phoneNumber), connectedResponse);
+        assertEquals("CONNECTED_DATA", client.getConnectivityStatus(phoneNumber));
     }
 
     /*

@@ -15,25 +15,31 @@
  */
 package com.vonage.client.camara.devicestatus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vonage.client.JsonableBaseObject;
 import com.vonage.client.common.E164;
 
 class DeviceStatusRequest extends JsonableBaseObject {
-    private final String phoneNumber;
 
-    DeviceStatusRequest(String phoneNumber) {
-        this.phoneNumber = new E164(phoneNumber).toString();
-    }
+  static class Device {
+    @JsonProperty("phoneNumber") String phoneNumber;
+  }
 
-    /**
-     * Gets the MSISDN for this request.
-     *
-     * @return The phone number in E.164 format.
-     */
-    @JsonProperty("phoneNumber")
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+  DeviceStatusRequest(String phoneNumber) {
+    device.phoneNumber = new E164(phoneNumber).toString();
+  }
 
+  @JsonProperty("device")
+  private final Device device = new Device();
+
+  /**
+   * Gets the MSISDN for this request.
+   *
+   * @return The phone number in E.164 format.
+   */
+  @JsonIgnore
+  public String getPhoneNumber() {
+    return device.phoneNumber;
+  }
 }
