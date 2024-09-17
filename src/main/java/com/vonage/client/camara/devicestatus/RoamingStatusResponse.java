@@ -20,11 +20,10 @@ import com.vonage.client.JsonableBaseObject;
 
 import java.util.List;
 
-class RoamingStatusResponse extends JsonableBaseObject {
+public class RoamingStatusResponse extends JsonableBaseObject {
     private boolean roaming;
     private int countryCode;
     private List<String> countryName;
-
 
     /**
      * Get the current roaming status information
@@ -49,11 +48,10 @@ class RoamingStatusResponse extends JsonableBaseObject {
     /**
      * Get the country Name list 
      *
-     * @return array of country names 
+     * @return List of country names
      */
     @JsonProperty("countryName")
     public List<String> getCountryName() {
         return countryName;
     }
-
 }

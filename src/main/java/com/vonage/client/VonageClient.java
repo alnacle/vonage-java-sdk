@@ -244,7 +244,7 @@ public class VonageClient {
      * Returns the CAMARA Device Status client.
      *
      * @return The Device Status client.
-     * @since 8.8.0
+     * @since 8.10.0-att
      */
     public DeviceStatusClient getDeviceStatusClient() {
         return deviceStatus;

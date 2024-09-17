@@ -21,6 +21,6 @@ public enum NotApplicableScope {
 
     @Override
     public String toString() {
-      return name().toLowerCase().replace('_', '-');
+        return name().toLowerCase().replace('_', ':');
     }
 }

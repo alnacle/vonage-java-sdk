@@ -26,10 +26,9 @@ import com.vonage.client.camara.CamaraResponseException;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
-import java.time.Instant;
 
 public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClient> {
-    final String phoneNumber = "+49 151 23456789", invalidNumber = TestUtils.API_SECRET;
+    final String phoneNumber = "+49 151 23456789";
 
     public DeviceStatusClientTest() {
         client = new DeviceStatusClient(wrapper);
@@ -65,80 +64,62 @@ public class DeviceStatusClientTest extends AbstractClientTest<DeviceStatusClien
     @Test
     public void testConnectivityDeviceStatus() throws Exception {
         setAuth(CONNECTIVITY_READ);
-        final String connectedResponse = "{\"connectivityStatus\":\"CONNECTED_DATA\"}";
+        String status = "CONNECTED_DATA", connectedResponse = "{\"connectivityStatus\":\""+status+"\"}";
 
         stubBackendNetworkResponse(connectedResponse);
-        assertEquals("CONNECTED_DATA", client.getConnectivityStatus(phoneNumber));
-    }
+        assertEquals(status, client.getConnectivityStatus(phoneNumber));
 
-    /*
-    @Test
-    public void testRetrieveDeviceStatusDate() throws Exception {
-        setAuth(RETRIEVE_SIM_SWAP_DATE);
-
-        var timestampStr = "2019-08-24T14:15:22Z";
-        var timestamp = Instant.parse(timestampStr);
-        var response = "{\"latestSimChange\": \""+timestampStr+"\"}";
-
-        stubBackendNetworkResponse(response);
-        assertEquals(timestamp, client.retrieveDeviceStatusDate(phoneNumber));
-
-        stubResponseAndAssertThrows(timestampStr,
-                () -> client.retrieveDeviceStatusDate(null),
-                NullPointerException.class
-        );
-
-        stubResponseAndAssertThrows(timestampStr,
-                () -> client.retrieveDeviceStatusDate(invalidNumber),
-                IllegalArgumentException.class
-        );
-
-        assert403CamaraResponseException(() -> client.retrieveDeviceStatusDate(phoneNumber));
+        setAuth(CONNECTIVITY_READ);
+        assert403CamaraResponseException(() -> client.getConnectivityStatus(phoneNumber));
     }
 
     @Test
-    public void testCheckEndpoint() throws Exception {
-        new DeviceStatusEndpointTestSpec<CheckDeviceStatusResponse>() {
-            final int maxAge = 560;
+    public void testRoamingDeviceStatus() throws Exception {
+        setAuth(ROAMING_READ);
+        boolean roaming = true;
+        int countryCode = 234;
+        String countryName = "DE", roamingResponse = "{\"roaming\":"+roaming+
+                ",\"countryCode\":"+countryCode+",\"countryName\":[\""+countryName+"\"]}";
 
+        stubBackendNetworkResponse(roamingResponse);
+        RoamingStatusResponse response = client.getRoamingStatus(phoneNumber);
+        assertEquals(roaming, response.getRoaming());
+        assertEquals(countryCode, response.getCountryCode());
+        assertEquals(countryName, response.getCountryName().getFirst());
+
+        setAuth(ROAMING_READ);
+        assert403CamaraResponseException(() -> client.getRoamingStatus(phoneNumber));
+    }
+
+    @Test
+    public void testGetConnectivityStatusEndpoint() throws Exception {
+        new DeviceStatusEndpointTestSpec<ConnectivityStatusResponse>() {
             @Override
-            protected RestEndpoint<DeviceStatusRequest, CheckDeviceStatusResponse> endpoint() {
-                return client.check;
+            protected RestEndpoint<DeviceStatusRequest, ConnectivityStatusResponse> endpoint() {
+                return client.connectivity;
             }
 
             @Override
-            protected FraudPreventionDetectionScope getScope() {
-                return CHECK_SIM_SWAP;
-            }
-
-            @Override
-            protected DeviceStatusRequest sampleRequest() {
-                return new DeviceStatusRequest(msisdn, 560);
-            }
-
-            @Override
-            protected String sampleRequestBodyString() {
-                return super.sampleRequestBodyString().replace("}", ",\"maxAge\":"+maxAge+"}");
+            protected NotApplicableScope getScope() {
+                return CONNECTIVITY_READ;
             }
         }
         .runTests();
     }
 
     @Test
-    public void testRetrieveDateEndpoint() throws Exception {
-        new DeviceStatusEndpointTestSpec<DeviceStatusDateResponse>() {
-
+    public void testGetRoamingStatusEndpoint() throws Exception {
+        new DeviceStatusEndpointTestSpec<RoamingStatusResponse>() {
             @Override
-            protected RestEndpoint<DeviceStatusRequest, DeviceStatusDateResponse> endpoint() {
-                return client.retrieveDate;
+            protected RestEndpoint<DeviceStatusRequest, RoamingStatusResponse> endpoint() {
+                return client.roaming;
             }
 
             @Override
-            protected FraudPreventionDetectionScope getScope() {
-                return RETRIEVE_SIM_SWAP_DATE;
+            protected NotApplicableScope getScope() {
+                return ROAMING_READ;
             }
         }
         .runTests();
     }
-    */
 }

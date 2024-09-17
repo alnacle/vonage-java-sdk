@@ -27,7 +27,7 @@ class ConnectivityStatusResponse extends JsonableBaseObject {
      * @return connectivity status of the device 
      */
     @JsonProperty("connectivityStatus")
-    public String getConnectivity() {
+    public String getConnectivityStatus() {
         return connectivityStatus;
     }
 }

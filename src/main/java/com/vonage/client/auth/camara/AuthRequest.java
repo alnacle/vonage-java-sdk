@@ -42,11 +42,11 @@ public abstract class AuthRequest implements QueryParamsRequest {
     }
 
     protected AuthRequest(String msisdn, NotApplicableScope scope) {
-        params.put("scope", "openid dpv:NotApplicableScope#" +
+        params.put("login_hint", new E164(msisdn).toString());
+        params.put("scope", "openid dpv:NotApplicableScope#device-status:" +
                 Objects.requireNonNull(scope, "Scope is required.")
         );
     }
-
 
     @Override
     public final Map<String, String> makeParams() {

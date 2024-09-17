@@ -20,6 +20,6 @@
  * <a href=https://developer.vonage.com/en/att-network-apis/overview>the developer documentation</a>
  * for an overview of the concepts.
  *
- * @since 8.8.0
+ * @since 8.10.0-att
  */
 package com.vonage.client.camara.devicestatus;
