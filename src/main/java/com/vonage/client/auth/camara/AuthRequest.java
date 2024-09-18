@@ -43,7 +43,7 @@ public abstract class AuthRequest implements QueryParamsRequest {
 
     protected AuthRequest(String msisdn, NotApplicableScope scope) {
         params.put("login_hint", new E164(msisdn).toString());
-        params.put("scope", "openid dpv:NotApplicableScope#device-status:" +
+        params.put("scope", "openid dpv:NotApplicable#device-status:" +
                 Objects.requireNonNull(scope, "Scope is required.")
         );
     }
