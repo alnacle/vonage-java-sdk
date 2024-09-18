@@ -29,4 +29,15 @@ public final class BackendAuthRequest extends AuthRequest {
     public BackendAuthRequest(String msisdn, FraudPreventionDetectionScope scope) {
         super(msisdn, scope);
     }
+
+    /**
+     * Creates the parameters for a Back-End Authorization OIDC request.
+     *
+     * @param msisdn The phone number of the user you want to authenticate in E.164 format.
+     * @param scope The scope of the request as an enum.
+     */
+    public BackendAuthRequest(String msisdn, NotApplicableScope scope) {
+        super(msisdn, scope);
+    }
+
 }

@@ -21,6 +21,7 @@ import com.vonage.client.auth.*;
 import com.vonage.client.auth.hashutils.HashUtil;
 import com.vonage.client.camara.numberverification.NumberVerificationClient;
 import com.vonage.client.camara.simswap.SimSwapClient;
+import com.vonage.client.camara.devicestatus.DeviceStatusClient;
 import com.vonage.client.conversations.ConversationsClient;
 import com.vonage.client.conversion.ConversionClient;
 import com.vonage.client.insight.InsightClient;
@@ -72,6 +73,7 @@ public class VonageClient {
     private final NumberInsight2Client numberInsight2;
     private final ConversationsClient conversations;
     private final SimSwapClient simSwap;
+    private final DeviceStatusClient deviceStatus;
     private final NumberVerificationClient numberVerification;
 
     private VonageClient(Builder builder) {
@@ -97,6 +99,7 @@ public class VonageClient {
         numberInsight2 = new NumberInsight2Client(httpWrapper);
         conversations = new ConversationsClient(httpWrapper);
         simSwap = new SimSwapClient(httpWrapper);
+        deviceStatus = new DeviceStatusClient(httpWrapper);
         numberVerification = new NumberVerificationClient(httpWrapper);
     }
 
@@ -235,6 +238,16 @@ public class VonageClient {
      */
     public SimSwapClient getSimSwapClient() {
         return simSwap;
+    }
+
+    /**
+     * Returns the CAMARA Device Status client.
+     *
+     * @return The Device Status client.
+     * @since 8.10.0-att
+     */
+    public DeviceStatusClient getDeviceStatusClient() {
+        return deviceStatus;
     }
 
     /**

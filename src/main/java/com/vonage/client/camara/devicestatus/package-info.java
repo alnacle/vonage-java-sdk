@@ -16,10 +16,10 @@
 
 /**
  * This package contains classes to support usage of the
- * <a href=https://developer.vonage.com/en/api/camara/sim-swap>SIM Swap API</a>. Please refer to
- * <a href=https://developer.vonage.com/en/sim-swap/overview>the developer documentation</a>
+ * <a href=https://developer.vonage.com/en/api/camara/device-status-att>Device Status</a>. Please refer to
+ * <a href=https://developer.vonage.com/en/att-network-apis/overview>the developer documentation</a>
  * for an overview of the concepts.
  *
- * @since 8.8.0
+ * @since 8.10.0-att
  */
-package com.vonage.client.camara.simswap;
+package com.vonage.client.camara.devicestatus;
